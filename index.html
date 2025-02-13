@@ -159,7 +159,7 @@
         opacity: 1;
       }
 
-      .card .photo-heart img {
+            .card .photo-heart img {
         width: 3rem;
         height: 3rem;
         position: absolute;
@@ -168,7 +168,10 @@
         z-index: 100;
         opacity: 0;
         transform: scale(0) rotate(0);
-        transition: opacity 0.5s ease, transform 0.5s ease;
+        transition: opacity 0.5s ease, transform 1s ease;
+        filter: drop-shadow(0 5px 15px rgba(48, 4, 4, 0.8))
+          drop-shadow(0 0 10px rgba(255, 82, 114, 0.8)); /* Soft glow */
+        transform: rotate(45deg);
       }
 
       .card:hover .photo-heart img {
