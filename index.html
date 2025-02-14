@@ -11,7 +11,7 @@
       rel="stylesheet"
     />
 
-    <title>Centered Zoom Card Effect</title>
+    <title>Happy Valentines Day</title>
     <style>
       * {
         margin: 0;
@@ -28,9 +28,9 @@
         background: linear-gradient(
           135deg,
           #ff5272,
-          rgb(126, 61, 82),
+          rgb(165, 54, 54),
           #ff5272,
-          rgb(126, 61, 82)
+          rgb(139, 11, 11)
         );
         background-size: 400% 400%;
         animation: gradientFlow 15s ease infinite;
@@ -107,7 +107,8 @@
       .card {
         background: linear-gradient(135deg, #f5e8e8, #f5e8e8, #f5e8e8, #ffe1e8);
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-        transition: filter 0.5s ease, box-shadow 0.5s ease, transform 0.5s ease;
+        transition: filter 0.5s ease, box-shadow 0.5s ease, transform 0.5s ease,
+          rotate 0.5s ease;
         cursor: pointer;
         height: 300px;
         width: 270px;
@@ -120,12 +121,30 @@
         padding: 10px;
         justify-content: start;
         border-radius: 5px;
+
+        opacity: 0;
+        transform: translateY(50px);
       }
 
-      .card:hover {
+      @keyframes cardAppear {
+        0% {
+          opacity: 0;
+          transform: translateY(500px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .container.appear .card {
+        animation: cardAppear 1s ease-out forwards;
+      }
+
+      .container.appear .card:hover {
         z-index: 2;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-        transform: rotate(-5deg);
+        rotate: -5deg;
       }
 
       .card .image-part img {
@@ -159,7 +178,7 @@
         opacity: 1;
       }
 
-            .card .photo-heart img {
+      .card .photo-heart img {
         width: 3rem;
         height: 3rem;
         position: absolute;
@@ -171,12 +190,11 @@
         transition: opacity 0.5s ease, transform 1s ease;
         filter: drop-shadow(0 5px 15px rgba(48, 4, 4, 0.8))
           drop-shadow(0 0 10px rgba(255, 82, 114, 0.8)); /* Soft glow */
-        transform: rotate(45deg);
       }
 
       .card:hover .photo-heart img {
         opacity: 1;
-        transform: scale(1) rotate(-45deg);
+        transform: scale(1) rotate(315deg);
       }
 
       .card .text-part {
@@ -189,6 +207,7 @@
         color: #f5e8e8;
         display: flex;
         flex-direction: column;
+        pointer-events: none;
       }
 
       .card .text-part-right {
@@ -216,24 +235,33 @@
       }
 
       .card .text-part h1,
-      .card .text-part p,
+      .card .text-part p {
+        opacity: 0;
+        transform: translateX(-50px);
+        filter: blur(10px);
+        transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s ease;
+      }
+
       .card .text-part-right h1,
       .card .text-part-right p {
-        opacity: 0; /* Initially hidden */
-        transform: translateX(
-          -50px
-        ); /* Start slightly off-position for animation */
+        opacity: 0;
+        transform: translateX(50px);
         filter: blur(10px);
-        transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s ease; /* Smooth transitions */
+        transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s ease;
       }
 
       body.zoomed .card:hover .text-part h1,
-      body.zoomed .card:hover .text-part p,
-      body.zoomed .card .text-part-right h1,
-      body.zoomed .card .text-part-right p {
-        opacity: 1; /* Make text visible */
+      body.zoomed .card:hover .text-part p {
+        opacity: 1;
         filter: blur(0);
-        transform: translateX(0); /* Reset to original position */
+        transform: translateX(0);
+      }
+
+      body.zoomed .card:hover .text-part-right h1,
+      body.zoomed .card:hover .text-part-right p {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateX(0);
       }
 
       .container.zoomed .card:not(:hover) {
@@ -261,6 +289,28 @@
         transition: filter 0.5s ease;
         display: flex;
         align-items: center;
+        opacity: 0;
+        transform: translateX(-200px);
+      }
+
+      .container.appear .top-section {
+        animation: titleappear 1s ease-out forwards;
+      }
+
+      @keyframes titleappear {
+        0% {
+          opacity: 0;
+          transform: translateX(-200px);
+        }
+
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .container.zoomed .top-section {
+        filter: brightness(1.5) blur(10px);
       }
 
       .top-section img {
@@ -268,7 +318,7 @@
         margin-left: 1rem;
 
         /* Drop shadow for images */
-        filter: drop-shadow(0 5px 15px rgba(48, 4, 4, 0.8))
+        filter: drop-shadow(0 5px 15px rgba(109, 0, 0, 0.8))
           drop-shadow(0 0 10px rgba(255, 82, 114, 0.8)); /* Soft glow */
         transform: rotate(45deg);
       }
@@ -284,7 +334,7 @@
         z-index: 999;
         background-color: #ff5272;
         padding: 10px 20px;
-        color: #f5e8e8;         
+        color: #f5e8e8;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
       }
@@ -310,7 +360,7 @@
           text-shadow: 0 0 5px #ff5272;
         }
         50% {
-          text-shadow: 0 0 15px #ff5272;
+          text-shadow: 0 0 15px #ff7996;
         }
         100% {
           text-shadow: 0 0 5px #ff5272;
@@ -464,12 +514,19 @@
         position: fixed;
         top: 0;
         right: 0;
+        transition: filter 0.5s ease;
       }
 
       .jap-2 {
         position: fixed;
         bottom: 0;
         left: 0;
+        transition: filter 0.5s ease;
+      }
+
+      body.zoomed .jap-1,
+      body.zoomed .jap-2 {
+        filter: brightness(1.5) blur(10px) !important;
       }
 
       .audio-player {
@@ -477,6 +534,28 @@
         width: 270px;
         position: relative;
         overflow: hidden;
+        opacity: 0;
+        transition: filter 0.5s ease;
+      }
+
+      .container.appear .audio-player {
+        animation: audioappear 1s ease-out forwards;
+      }
+
+      @keyframes audioappear {
+        0% {
+          opacity: 0;
+          transform: translateY(-200px);
+        }
+
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      body.zoomed .audio-player {
+        filter: brightness(1.5) blur(10px) !important;
       }
 
       .song-title {
@@ -551,23 +630,25 @@
         text-align: right;
       }
 
-      /* Loader Overlay */
       #loader {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: #fff; /* You can change this to match your theme */
+        background: #fff;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         z-index: 10000;
-        transition: opacity 0.5s ease;
+        transition: opacity 0.5s ease, filter 0.5s ease;
       }
 
-      /* Pulsating Heart (Valentine's theme) */
+      body.zoomed #loader {
+        filter: brightness(1.5) blur(10px) !important;
+      }
+
       .heartloader {
         position: relative;
         width: 50px;
@@ -613,6 +694,55 @@
         font-size: 1rem;
         color: #ff5272;
       }
+
+      .container.appear .card:nth-child(1) {
+        animation-delay: 0.2s;
+      }
+      .container.appear .card:nth-child(2) {
+        animation-delay: 0.4s;
+      }
+      .container.appear .card:nth-child(3) {
+        animation-delay: 0.6s;
+      }
+      .container.appear .card:nth-child(4) {
+        animation-delay: 0.8s;
+      }
+      .container.appear .card:nth-child(5) {
+        animation-delay: 1s;
+      }
+      .container.appear .card:nth-child(6) {
+        animation-delay: 1.2s;
+      }
+      .container.appear .card:nth-child(7) {
+        animation-delay: 1.4s;
+      }
+      .container.appear .card:nth-child(8) {
+        animation-delay: 1.6s;
+      }
+      .container.appear .card:nth-child(9) {
+        animation-delay: 1.8s;
+      }
+      .container.appear .card:nth-child(10) {
+        animation-delay: 2s;
+      }
+      .container.appear .card:nth-child(11) {
+        animation-delay: 2.2s;
+      }
+      .container.appear .card:nth-child(12) {
+        animation-delay: 2.4s;
+      }
+
+      #canvas {
+        position: fixed;
+        min-width: 100vw;
+        min-height: 100vh;
+        background-color: rgb(27, 6, 10);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+      body.zoomed #canvas {
+        opacity: 70%;
+      }
     </style>
   </head>
   <body>
@@ -621,9 +751,12 @@
       <p class="loading-text">Loading...</p>
     </div>
 
+    <canvas id="canvas">Canvas not supported.</canvas>
+    <div class="vignette"></div>
+
     <div class="jap">
-      <p class="jap-1">バレンタ</p>
-      <p class="jap-2">インデー</p>
+      <p class="jap-1">私の最愛の人</p>
+      <p class="jap-2">ブロキー</p>
     </div>
 
     <p class="address">From: Jhan To: Gette :)</p>
@@ -652,7 +785,7 @@
       </div>
       <div class="audio-player">
         <div class="song-title">Two is Better Than One</div>
-        <audio id="audio" src="twoisbetterthanone.mp3" autoplay></audio>
+        <audio id="audio" src="twoisbetterthanone.mp3"></audio>
         <div class="controls">
           <button id="play-pause">►</button>
           <div class="progress-container">
@@ -775,7 +908,7 @@
           <p class="date">October 26, 2024</p>
         </div>
         <div class="text-part">
-          <h1>Comfort in Togetherness</h1>
+          <h1>Comfort In Togetherness</h1>
           <div class="line"></div>
           <p>"You with me -- three words that bring comfort to existence."</p>
         </div>
@@ -789,7 +922,7 @@
           <p class="date">January 3, 2025</p>
         </div>
         <div class="text-part-right">
-          <h1>Healing Together</h1>
+          <h1>Relief</h1>
           <div class="line"></div>
           <p>"Recuperating with you."</p>
         </div>
@@ -887,17 +1020,174 @@
         audio.currentTime = progressBar.value;
       });
 
-      const MIN_LOADING_TIME = 2000; // 2 seconds
-
+      const MIN_LOADING_TIME = 2000;
       window.addEventListener("load", function () {
         setTimeout(() => {
           const loader = document.getElementById("loader");
           loader.style.opacity = "0";
           setTimeout(() => {
             loader.style.display = "none";
+            document.querySelector(".container").classList.add("appear");
           }, 500);
         }, MIN_LOADING_TIME);
       });
+
+      /*
+       * File Name / glitteringSea.js
+       * Created Date / Aug 14, 2020
+       * Aurhor / Toshiya Marukubo
+       * Twitter / https://twitter.com/toshiyamarukubo
+       */
+
+      (function () {
+        "use strict";
+        window.addEventListener("load", function () {
+          var canvas = document.getElementById("canvas");
+
+          if (!canvas || !canvas.getContext) {
+            return false;
+          }
+
+          /********************
+      Random Number
+    ********************/
+
+          function rand(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+          }
+
+          /********************
+      Var
+    ********************/
+
+          var ctx = canvas.getContext("2d");
+          var X = (canvas.width = window.innerWidth);
+          var Y = (canvas.height = window.innerHeight);
+          var mouseX = null;
+          var mouseY = null;
+          var shapeNum = 100;
+          var shapes = [];
+          var style = {
+            black: "#ff5272",
+            white: "#ff5272",
+            lineWidth: 0,
+          };
+
+          /********************
+      Animation
+    ********************/
+
+          window.requestAnimationFrame =
+            window.requestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.msRequestAnimationFrame ||
+            function (cb) {
+              setTimeout(cb, 1);
+            };
+
+          /********************
+      Shape
+    ********************/
+
+          function Shape(ctx, x, y) {
+            this.ctx = ctx;
+            this.init(x, y);
+          }
+
+          Shape.prototype.init = function (x, y) {
+            this.x = x;
+            this.y = y;
+            this.r = rand(10, 25);
+            this.ga =
+              Math.random() * Math.random() * Math.random() * Math.random();
+            this.v = {
+              x: Math.random(),
+              y: -1,
+            };
+            this.l = rand(0, 20);
+            this.sl = this.l;
+          };
+
+          Shape.prototype.updateParams = function () {
+            var ratio = this.l / this.sl;
+            //this.r *= ratio;
+            this.l -= 1;
+            if (this.l < 0) {
+              this.init((X * (Math.random() + Math.random())) / 2, rand(0, Y));
+            }
+          };
+
+          Shape.prototype.updatePosition = function () {
+            this.x += Math.random();
+            this.y += -Math.random();
+          };
+
+          Shape.prototype.draw = function () {
+            var ctx = this.ctx;
+            ctx.save();
+            ctx.globalCompositeOperation = "lighter";
+            ctx.globalAlpha = this.ga;
+            //ctx.fillStyle = 'rgb(123, 252, 100)';
+            ctx.fillStyle = "#ff7cae";
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, false);
+            ctx.fill();
+            ctx.restore();
+          };
+
+          Shape.prototype.render = function (i) {
+            this.updatePosition();
+            this.updateParams();
+            this.draw();
+          };
+
+          for (var i = 0; i < shapeNum; i++) {
+            var s = new Shape(
+              ctx,
+              (X * (Math.random() + Math.random())) / 2,
+              rand(0, Y)
+            );
+            shapes.push(s);
+          }
+
+          /********************
+      Render
+    ********************/
+
+          function render() {
+            ctx.clearRect(0, 0, X, Y);
+            for (var i = 0; i < shapes.length; i++) {
+              shapes[i].render(i);
+            }
+            requestAnimationFrame(render);
+          }
+
+          render();
+
+          /********************
+      Event
+    ********************/
+
+          function onResize() {
+            X = canvas.width = window.innerWidth;
+            Y = canvas.height = window.innerHeight;
+          }
+
+          window.addEventListener("resize", function () {
+            onResize();
+          });
+
+          window.addEventListener(
+            "mousemove",
+            function (e) {
+              mouseX = e.clientX;
+              mouseY = e.clientY;
+            },
+            false
+          );
+        });
+      })();
     </script>
   </body>
 </html>
